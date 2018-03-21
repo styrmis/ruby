@@ -2346,6 +2346,18 @@ CODE
     assert_equal(676, count)
   end
 
+  def test_upto_issue_13663
+    a     = S("b")
+    start = S("b")
+    count = 0
+    assert_equal(S("b"), a.upto(S("ab")) {|s|
+                   assert_equal(start, s)
+                   start.succ!
+                   count += 1
+                   })
+    assert_equal(27, count)
+  end
+
   def test_upto_numeric
     a     = S("00")
     start = S("00")
