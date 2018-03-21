@@ -74,9 +74,17 @@ class TestArray < Test::Unit::TestCase
     end
   end
 
-  def test_array_intersection
+  def test_small_array_intersection
     list_a = [ Var.new('a') ]
     list_b = [ Var.new('b') ]
+
+    assert_equal((list_a & list_b).empty?, true)
+  end
+
+  def test_large_array_intersection
+    # An array is considered to be 'large' if it has > 16 elements
+    list_a = 17.times.collect {|i| Var.new('a') }
+    list_b = 17.times.collect {|i| Var.new('b') }
 
     assert_equal((list_a & list_b).empty?, true)
   end
