@@ -78,7 +78,7 @@ class TestArray < Test::Unit::TestCase
     list_a = [ Var.new('a') ]
     list_b = [ Var.new('b') ]
 
-    assert_equal((list_a & list_b).empty?, true)
+    assert_equal((list_a & list_b), [])
   end
 
   def test_large_array_intersection
@@ -86,7 +86,7 @@ class TestArray < Test::Unit::TestCase
     list_a = 17.times.collect {|i| Var.new('a') }
     list_b = 17.times.collect {|i| Var.new('b') }
 
-    assert_equal((list_a & list_b).empty?, true)
+    assert_equal((list_a & list_b), [])
   end
 
   def test_compact_0
