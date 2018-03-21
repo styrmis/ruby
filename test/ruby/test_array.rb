@@ -58,6 +58,29 @@ class TestArray < Test::Unit::TestCase
     assert_equal([1,2,3,4,6], ([1,2,3]|[2,4,6]))
   end
 
+  class Var
+    attr_reader :v
+
+    def initialize(v)
+      @v = v
+    end
+
+    def eql?(other)
+      true
+    end
+
+    def hash
+      v.hash
+    end
+  end
+
+  def test_array_intersection
+    list_a = [ Var.new('a') ]
+    list_b = [ Var.new('b') ]
+
+    assert_equal((list_a & list_b).empty?, true)
+  end
+
   def test_compact_0
     a = [nil, 1, nil, nil, 5, nil, nil]
     assert_equal [1, 5], a.compact
