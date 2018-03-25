@@ -4014,21 +4014,6 @@ rb_ary_includes(VALUE ary, VALUE item)
 }
 
 static VALUE
-rb_ary_includes_by_eql(VALUE ary, VALUE item)
-{
-    long i;
-    VALUE e;
-
-    for (i=0; i<RARRAY_LEN(ary); i++) {
-	e = RARRAY_AREF(ary, i);
-	if (rb_eql(item, e)) {
-	    return Qtrue;
-	}
-    }
-    return Qfalse;
-}
-
-static VALUE
 rb_ary_includes_by_hash(VALUE ary, VALUE item)
 {
     long i;
