@@ -4029,6 +4029,27 @@ rb_ary_includes_by_eql(VALUE ary, VALUE item)
 }
 
 static VALUE
+rb_ary_includes_by_hash(VALUE ary, VALUE item)
+{
+    long i;
+    VALUE e, item_hash, e_hash;
+
+    ID id_hash = rb_intern("hash");
+
+    item_hash = rb_funcall(item, id_hash, 0);
+
+    for (i=0; i<RARRAY_LEN(ary); i++) {
+        e = RARRAY_AREF(ary, i);
+        e_hash = rb_funcall(e, id_hash, 0);
+        if (rb_eql(item_hash, e_hash)) {
+            return Qtrue;
+        }
+    }
+
+    return Qfalse;
+}
+
+static VALUE
 recursive_cmp(VALUE ary1, VALUE ary2, int recur)
 {
     long i, len;
